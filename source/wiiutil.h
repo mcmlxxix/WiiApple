@@ -16,7 +16,7 @@ inline unsigned int lfix(unsigned int x)
         (x<<24);
 }
 
-#define DEBUGFILE "fat3:/debug.txt"
+#define DEBUGFILE "/debug.txt"
 
 void logmsg(const char *s, int n);
 

@@ -87,8 +87,8 @@ struct sigaction sa_SysClk;
 struct itimerval mytimeset;
 
 
-#if 0
-void SysClk_TickTimer(int signum)
+#if 1
+void SysClk_TickTimer(syswd_t signum, void *cbargs)
 {	// should occur every specified times per second
 	g_bTimerToggle = true;	// just set the toggle flag, and leave peacefully? --bb
 }
@@ -100,10 +100,10 @@ static syswd_t alarm;
 timespec tstart;
 timespec tinterval;
 
-void SysClk_TickTimer(syswd_t aalarm)
-{
-	g_bTimerToggle = true;	// just set the toggle flag, and leave peacefully? --bb
-}
+//void SysClk_TickTimer(syswd_t aalarm)
+//{
+//	g_bTimerToggle = true;	// just set the toggle flag, and leave peacefully? --bb
+//}
 
 
 void SysClk_WaitTimer()
@@ -141,7 +141,8 @@ void SysClk_StartTimerUsec(DWORD dwUsecPeriod)
 		alarm, 
 		&tstart,
 		&tinterval,
-		SysClk_TickTimer
+		SysClk_TickTimer,
+		NULL
 		);
 
 	g_dwLastUsecPeriod = dwUsecPeriod;

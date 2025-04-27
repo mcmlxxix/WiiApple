@@ -863,7 +863,7 @@ static inline int Fetch(BYTE& iOpcode, ULONG uExecutedCycles)
 //		iOpcode = *(mem+regs.pc);
 
 #if 0
-		FILE *debug = fopen("fat3:/cpu.log", "a+");
+		FILE *debug = fopen("/cpu.log", "a+");
 
 		if (debug) {
 			fprintf(debug, "Regs.pc %08lx (%d)\n", regs.pc, (regs.pc & 0xF000) == 0xC000);
@@ -1638,7 +1638,7 @@ void CpuInitialize ()
 	CpuReset();	// Init's ps & pc. Updates sp
 
 #if 0
-		FILE *debug = fopen("fat3:/cpu.log", "a+");
+		FILE *debug = fopen("/cpu.log", "a+");
 
 	if (debug) {
 		fprintf(debug, "xRegs.pc %08x (%d)\n", regs.pc, (regs.pc & 0xF000) == 0xC000);

@@ -1510,7 +1510,7 @@ void VideoBenchmark () {
                    outstr,
                    TEXT("Benchmarks"),
                    MB_ICONINFORMATION | MB_SETFOREGROUND);*/
-	      FILE *f = fopen("fat3://wiiapple-error.txt", "a+");
+	      FILE *f = fopen("//wiiapple-error.txt", "a+");
 	      if (f) {
 		      fprintf(f, "The emulator experienced an error %u clock cycles into the CPU benchmark.\n",(unsigned)loop);
 		      fprintf(f, "Prior to the error, the program counter was at $%04X.\n", (unsigned)lastpc);
@@ -1528,7 +1528,7 @@ void VideoBenchmark () {
                    TEXT("a timer interrupt handler."),
                    TEXT("Benchmarks"),
                    MB_ICONINFORMATION | MB_SETFOREGROUND);*/
-	      	      FILE *f = fopen("fat3://wiiapple-error2.txt", "a+");
+	      	      FILE *f = fopen("//wiiapple-error2.txt", "a+");
 		      if (f) {
 			      fprintf(f, "The emulator was unable to locate the exact point of the error.\n");
 			      fprintf(f, "This probably means that the problem is external to the emulator, happening asynchronously,\n");
@@ -1834,13 +1834,13 @@ void VideoInitialize () {
   ZeroMemory(vidlastmem,0x10000);
 
   // LOAD THE LOGO
-  tmp_surface = SDL_LoadBMP("fat3:/apps/wiiapple/applelin.bmp");
+  tmp_surface = SDL_LoadBMP("/apps/wiiapple/applelin.bmp");
   if (tmp_surface != NULL)  g_hLogoBitmap = SDL_DisplayFormat(tmp_surface);
   	else fprintf(stderr, "Video: applelin.bmp was not loaded\n");
   SDL_FreeSurface(tmp_surface);
 
   // LOAD APPLE CHARSET40
-  tmp_surface = SDL_LoadBMP("fat3:/apps/wiiapple/charset40.bmp");
+  tmp_surface = SDL_LoadBMP("/apps/wiiapple/charset40.bmp");
   if(tmp_surface != NULL)  charset40 = SDL_DisplayFormat(tmp_surface);
   	else fprintf(stderr, "Video: Apple text is not unavailable: charset40.bmp was not loaded\n");
   SDL_FreeSurface(tmp_surface);

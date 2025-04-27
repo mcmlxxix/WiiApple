@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "wwrapper.h"
 			     //#pragma  hdrstop
 
-#define DEFAULT_SNAPSHOT_NAME "fat3:/wiiapple/SaveState.aws"
+#define DEFAULT_SNAPSHOT_NAME "/wiiapple/SaveState.aws"
 
 bool g_bSaveStateOnExit = false;
 

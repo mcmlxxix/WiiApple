@@ -27,6 +27,7 @@
 //#include <ddraw.h> - no need
 //#include <htmlhelp.h> - no need
 #include <SDL.h>
+//#include <SDL2/SDL.h>
 
 
 #include "Common.h"

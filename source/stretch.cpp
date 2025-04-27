@@ -463,7 +463,7 @@ SDL_Surface *font_sfc = NULL;	// used for font
 bool fonts_initialization(void)
 {
 	SDL_Surface *temp_surface;
-	temp_surface = SDL_LoadBMP("fat3:/apps/wiiapple/font.bmp");
+	temp_surface = SDL_LoadBMP("/apps/wiiapple/font.bmp");
 	if(!temp_surface) return false;
 	font_sfc = SDL_DisplayFormat(temp_surface);
 

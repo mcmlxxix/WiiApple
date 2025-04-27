@@ -39,6 +39,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <sys/stat.h>
 #include <sys/types.h>
 
+//FAT
+//#include <stdio.h>
+//#include <stdlib.h>
+#include <fat.h>
 
 //char VERSIONSTRING[] = "xx.yy.zz.ww";
 
@@ -589,7 +593,9 @@ void LoadConfiguration ()
 // Load starting directory for saving current states
   RegLoadString(TEXT("Preferences"), REGVALUE_PREF_SAVESTATE_DIR, 1, &szFilename, MAX_PATH);
 
-  strcpy(g_sSaveStateDir, "fat3:/wiiapple/");
+  strcpy(g_sSaveStateDir, "/wiiapple/");
+
+  fatInitDefault();
   mkdir(g_sSaveStateDir, 0777);
 
   if (szFilename) {
@@ -603,7 +609,7 @@ void LoadConfiguration ()
 	    if(tmp == NULL) strcpy(g_sSaveStateDir, "/");  //begin from the root, then
 	    else strcpy(g_sSaveStateDir, tmp);
   	  }
-
+	  
 
 // ****By now we deal without Uthernet interface! --bb****
  //   char szUthernetInt[MAX_PATH] = {0};

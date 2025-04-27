@@ -438,7 +438,7 @@ void DiskInitialize ()
 /*	TCHAR imagefilename[MAX_PATH];
 	_tcscpy(imagefilename,g_sProgramDir);
 	_tcscat(imagefilename,TEXT("MASTER.DSK")); // TODO: Should remember last disk by user*/
-#define MASTER_DISK	"fat3:/apps/wiiapple/Master.dsk"
+#define MASTER_DISK	"/apps/wiiapple/Master.dsk"
 	DiskInsert(0,MASTER_DISK,0,0); // yeah, and to save drive1, drive2 in Registry (conf file I mean ^_^)
 }
 

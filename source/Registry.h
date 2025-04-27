@@ -1,7 +1,7 @@
 #pragma once
 
 // configuration file
-#define REGISTRY	"fat3:/wiiapple/linapple.conf"
+#define REGISTRY	"/wiiapple/linapple.conf"
 extern FILE * registry;	// our opened file
 
 

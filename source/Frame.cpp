@@ -887,10 +887,10 @@ void FrameSaveBMP(void)
 	static int i = 1;	// index
 	char bmpname[20];	// file name
 
-	snprintf(bmpname, 20, "fat3:/apps/wiiapple/linapple%d.bmp", i);
+	snprintf(bmpname, 20, "/apps/wiiapple/linapple%d.bmp", i);
 	while(!stat(bmpname, &bufp)) {	// find first absent file
 		i++;
-		snprintf(bmpname, 20, "fat3:/apps/wiiapple/linapple%d.bmp", i);
+		snprintf(bmpname, 20, "/apps/wiiapple/linapple%d.bmp", i);
 	}
 	SDL_SaveBMP(screen, bmpname);	// save file using SDL inner function
 	printf("File %s saved!\n", bmpname);
@@ -1179,7 +1179,7 @@ int InitSDL()
 
 
 
-	apple_icon = SDL_LoadBMP("fat3:/apps/wiiapple/icon.bmp");
+	apple_icon = SDL_LoadBMP("/apps/wiiapple/icon.bmp");
 	if(apple_icon != NULL) {
 		Uint32 colorkey = SDL_MapRGB(apple_icon->format, 0, 0, 0);
 		SDL_SetColorKey(apple_icon, SDL_SRCCOLORKEY, colorkey);

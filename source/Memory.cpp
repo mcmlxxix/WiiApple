@@ -984,7 +984,7 @@ int MemInitialize() // returns -1 if any eror during initialization
 	}
 
 #if 0
-	FILE *debug = fopen("fat3:/dbg.txt", "a+");
+	FILE *debug = fopen("/dbg.txt", "a+");
 
 	if (debug) {
 		fprintf(debug, "type = %d\n", g_Apple2Type);
