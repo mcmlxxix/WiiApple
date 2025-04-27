@@ -4,3 +4,5 @@
 
 /.vs
 *.cpp~
+*.h~
+/build

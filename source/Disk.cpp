@@ -681,9 +681,9 @@ void DiskSelectImage (int drive, const LPSTR pszFilename)
        if (_tcsicmp(directory,filename))
          RegSaveString(TEXT("Preferences"),REGVALUE_PREF_START_DIR,1,filename);*/
 
-// in future: save file name in registry for future fetching
-// for one drive will be one reg parameter
-//	RegSaveString(TEXT("Preferences"),REGVALUE_PREF_START_DIR, 1,filename);
+	// in future: save file name in registry for future fetching
+	// for one drive will be one reg parameter
+	//	RegSaveString(TEXT("Preferences"),REGVALUE_PREF_START_DIR, 1,filename);
 	if(drive == 0)
 		RegSaveString(TEXT("Preferences"),REGVALUE_DISK_IMAGE1, 1, fullpath);
 	else
