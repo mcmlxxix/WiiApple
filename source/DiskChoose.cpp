@@ -113,13 +113,13 @@ bool ChooseAnImage(int sx,int sy, char *incoming_dir, int slot, char **filename,
 //	files.Delete();
 //	sizes.Delete();
 
-		DIR *dp;
-		struct dirent *ep;
+	DIR *dp;
+	struct dirent *ep;
 
-		dp = opendir (incoming_dir);	// open and read incoming directory
-		char *tmp;
+	dp = opendir (incoming_dir);	// open and read incoming directory
+	char *tmp;
 
-		int i,j, B, N;	// for cycles, beginning and end of list
+	int i,j, B, N;	// for cycles, beginning and end of list
 
 // build prev dir
 	if(strcmp(incoming_dir, "/")) {
@@ -134,73 +134,73 @@ bool ChooseAnImage(int sx,int sy, char *incoming_dir, int slot, char **filename,
 	else	B = 0;	// for sorting dirs
 
 
-		if (dp != NULL)
+	if (dp != NULL)
+	{
+		while ((ep = (readdir (dp)))) // first looking for directories
 		{
-			while ((ep = (readdir (dp)))) // first looking for directories
+
+			int what = getstat(incoming_dir, ep->d_name, NULL);
+			if (strlen(ep->d_name) > 0 && /*strcmp(ep->d_name,".")*/// omit "." (cur dir)
+					ep->d_name[0] != '.'/*strcmp(ep->d_name,"..")*/ && what == 1) // is directory!
 			{
+				tmp = new char[strlen(ep->d_name)+1];	// add entity to list
+				strcpy(tmp, ep->d_name);
+				files.Add(tmp);
+				tmp = new char[6];
+				strcpy(tmp, "<DIR>");
+				sizes.Add(tmp);	// add sign of directory
+			} /* if */
 
-				int what = getstat(incoming_dir, ep->d_name, NULL);
-				if (strlen(ep->d_name) > 0 && /*strcmp(ep->d_name,".")*/// omit "." (cur dir)
-					 ep->d_name[0] != '.'/*strcmp(ep->d_name,"..")*/ && what == 1) // is directory!
-				{
-					tmp = new char[strlen(ep->d_name)+1];	// add entity to list
-					strcpy(tmp, ep->d_name);
-					files.Add(tmp);
-					tmp = new char[6];
-					strcpy(tmp, "<DIR>");
-					sizes.Add(tmp);	// add sign of directory
-				} /* if */
-
-			}
-// sort directories. Please, don't laugh at my bubble sorting - it the simplest thing I've ever seen --bb
-			if(files.Length() > 2)
-			{
-				N = files.Length() - 1;
-//				B = 1;`- defined above
-				for(i = N; i > B; i--)
-					for(j = B; j < i; j++)
-						if(strcasecmp(files[j], files[j + 1]) > 0)
-						{
-							files.Swap(j,j + 1);
-							sizes.Swap(j,j + 1);
-						}
-
-			}
-			B = files.Length();	// start for files
-
-			(void) rewinddir (dp);	// to the start
-				// now get all regular files
-			while ((ep = (readdir (dp))))
-			{
-				int fsize;
-
-				if (strlen(ep->d_name) > 4 && ep->d_name[0] != '.'
-					&& (getstat(incoming_dir, ep->d_name, &fsize) == 2)) // is normal file!
-				{
-					tmp = new char[strlen(ep->d_name)+1];	// add this entity to list
-					strcpy(tmp, ep->d_name);
-					files.Add(tmp);
-					tmp = new char[10];	// 1400000KB
-					snprintf(tmp, 9, "%dKB", fsize);
-					sizes.Add(tmp);	// add this size to list
-				} /* if */
-
-			}
-			(void) closedir (dp);
-// do sorting for files
-			if(files.Length() > 2 && B < files.Length())
-			{
-				N = files.Length() - 1;
-//				B = 1;
-				for(i = N; i > B; i--)
-					for(j = B; j < i; j++)
-						if(strcasecmp(files[j], files[j + 1]) > 0)
-						{
-							files.Swap(j,j + 1);
-							sizes.Swap(j,j + 1);
-						}
-			}
 		}
+// sort directories. Please, don't laugh at my bubble sorting - it the simplest thing I've ever seen --bb
+		if(files.Length() > 2)
+		{
+			N = files.Length() - 1;
+//				B = 1;`- defined above
+			for(i = N; i > B; i--)
+				for(j = B; j < i; j++)
+					if(strcasecmp(files[j], files[j + 1]) > 0)
+					{
+						files.Swap(j,j + 1);
+						sizes.Swap(j,j + 1);
+					}
+
+		}
+		B = files.Length();	// start for files
+
+		(void) rewinddir (dp);	// to the start
+			// now get all regular files
+		while ((ep = (readdir (dp))))
+		{
+			int fsize;
+
+			if (strlen(ep->d_name) > 4 && ep->d_name[0] != '.'
+				&& (getstat(incoming_dir, ep->d_name, &fsize) == 2)) // is normal file!
+			{
+				tmp = new char[strlen(ep->d_name)+1];	// add this entity to list
+				strcpy(tmp, ep->d_name);
+				files.Add(tmp);
+				tmp = new char[10];	// 1400000KB
+				snprintf(tmp, 9, "%dKB", fsize);
+				sizes.Add(tmp);	// add this size to list
+			} /* if */
+
+		}
+		(void) closedir (dp);
+// do sorting for files
+		if(files.Length() > 2 && B < files.Length())
+		{
+			N = files.Length() - 1;
+//				B = 1;
+			for(i = N; i > B; i--)
+				for(j = B; j < i; j++)
+					if(strcasecmp(files[j], files[j + 1]) > 0)
+					{
+						files.Swap(j,j + 1);
+						sizes.Swap(j,j + 1);
+					}
+		}
+	}
 
 //	Count out cursor position and file number output
 	act_file = *index_file;
@@ -291,8 +291,8 @@ bool ChooseAnImage(int sx,int sy, char *incoming_dir, int slot, char **filename,
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // draw rectangles
-	rectangle(screen, 0, TOPX - 5, SCREEN_WIDTH, 320, SDL_MapRGB(screen->format, 255, 255, 255));
-	rectangle(screen, 480, TOPX - 5, 0, 320, SDL_MapRGB(screen->format, 255, 255, 255));
+	//rectangle(screen, 0, TOPX - 5, SCREEN_WIDTH, 320, SDL_MapRGB(screen->format, 255, 255, 255));
+	//rectangle(screen, 480, TOPX - 5, 0, 320, SDL_MapRGB(screen->format, 255, 255, 255));
 #undef TOPX
 
 
