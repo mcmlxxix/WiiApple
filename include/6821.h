@@ -1,68 +1,78 @@
 // Motorola MC6821 PIA
 
-typedef void (*mem_write_handler) (void* objFrom, void* objTo, int nAddr, BYTE byData);
+typedef void (*mem_write_handler)(void *objFrom, void *objTo, int nAddr, unsigned char byData);
 
-typedef struct _STWriteHandler
-{
-	void* objTo;
-	mem_write_handler func;
+typedef struct _STWriteHandler {
+  void *objTo;
+  mem_write_handler func;
 } STWriteHandler;
 
-//
+#define  PIA_DDRA  0
+#define  PIA_CTLA  1
+#define  PIA_DDRB  2
+#define  PIA_CTLB  3
 
-#define	PIA_DDRA	0
-#define	PIA_CTLA	1
-#define	PIA_DDRB	2
-#define	PIA_CTLB	3
-
-class C6821
-{
+class C6821 {
 public:
-	C6821();
-	virtual ~C6821();
+  C6821();
 
-	BYTE GetPB();
-	BYTE GetPA();
-	void SetPB(BYTE byData);
-	void SetPA(BYTE byData);
-	void SetCA1( BYTE byData );
-	void SetCA2( BYTE byData );
-	void SetCB1( BYTE byData );
-	void SetCB2( BYTE byData );
-	void Reset();
-	BYTE Read( BYTE byRS );
-	void Write( BYTE byRS, BYTE byData );
+  virtual ~C6821();
 
-	void UpdateInterrupts();
+  unsigned char GetPB();
 
-	void SetListenerA( void *objTo, mem_write_handler func );
-	void SetListenerB( void *objTo, mem_write_handler func );
-	void SetListenerCA2( void *objTo, mem_write_handler func );
-	void SetListenerCB2( void *objTo, mem_write_handler func );
+  unsigned char GetPA();
+
+  void SetPB(unsigned char byData);
+
+  void SetPA(unsigned char byData);
+
+  void SetCA1(unsigned char byData);
+
+  void SetCA2(unsigned char byData);
+
+  void SetCB1(unsigned char byData);
+
+  void SetCB2(unsigned char byData);
+
+  void Reset();
+
+  unsigned char Read(unsigned char byRS);
+
+  void Write(unsigned char byRS, unsigned char byData);
+
+  void UpdateInterrupts();
+
+  void SetListenerA(void *objTo, mem_write_handler func);
+
+  void SetListenerB(void *objTo, mem_write_handler func);
+
+  void SetListenerCA2(void *objTo, mem_write_handler func);
+
+  void SetListenerCB2(void *objTo, mem_write_handler func);
 
 protected:
-	BYTE	m_byIA;
-	BYTE	m_byCA1;
-	BYTE	m_byICA2;
-	BYTE	m_byOA;
-	BYTE	m_byOCA2;
-	BYTE	m_byDDRA;
-	BYTE	m_byCTLA;
-	BYTE	m_byIRQAState;
+  unsigned char m_byIA;
+  unsigned char m_byCA1;
+  unsigned char m_byICA2;
+  unsigned char m_byOA;
+  unsigned char m_byOCA2;
+  unsigned char m_byDDRA;
+  unsigned char m_byCTLA;
+  unsigned char m_byIRQAState;
 
-	BYTE	m_byIB;
-	BYTE	m_byCB1;
-	BYTE	m_byICB2;
-	BYTE	m_byOB;
-	BYTE	m_byOCB2;
-	BYTE	m_byDDRB;
-	BYTE	m_byCTLB;
-	BYTE	m_byIRQBState;
+  unsigned char m_byIB;
+  unsigned char m_byCB1;
+  unsigned char m_byICB2;
+  unsigned char m_byOB;
+  unsigned char m_byOCB2;
+  unsigned char m_byDDRB;
+  unsigned char m_byCTLB;
+  unsigned char m_byIRQBState;
 
-	STWriteHandler m_stOutA;
-	STWriteHandler m_stOutB;
-	STWriteHandler m_stOutCA2;
-	STWriteHandler m_stOutCB2;
-	STWriteHandler m_stOutIRQA;
-	STWriteHandler m_stOutIRQB;
+  STWriteHandler m_stOutA;
+  STWriteHandler m_stOutB;
+  STWriteHandler m_stOutCA2;
+  STWriteHandler m_stOutCB2;
+  STWriteHandler m_stOutIRQA;
+  STWriteHandler m_stOutIRQB;
 };

@@ -22,7 +22,7 @@
 */
 
 
-/*	Auxiallary routines */
+/*  Auxiallary routines */
 
 
 /* This a stretch blit implementation based on ideas given to me by
@@ -38,23 +38,19 @@
 /* Perform a stretch blit between two surfaces of the same format.
    NOTE:  This function is not safe to call from multiple threads!
 */
-int SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect,
-                    SDL_Surface *dst, SDL_Rect *dstrect);
+
+int SDL_SoftStretchMy(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect);
 
 
-
-/*	SDL_SoftStretchOr	- the same as SDL_SoftStretch, but ORed with destination
-	NOTE: 24bpp does not support	-- beom beotiger 2007 November
+/*  SDL_SoftStretchOr  - the same as SDL_SoftStretch, but ORed with destination
+  NOTE: 24bpp does not support  -- beom beotiger 2007 November
 */
 /* Perform a stretch blit between two surfaces of the same format.
    NOTE:  This function is not safe to call from multiple threads!
 */
-int SDL_SoftStretchOr(SDL_Surface *src, SDL_Rect *srcrect,
-		    SDL_Surface *dst, SDL_Rect *dstrect);
+int SDL_SoftStretchOr(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect);
 
-int SDL_SoftStretchMono8(SDL_Surface *src, SDL_Rect *srcrect,
-			 SDL_Surface *dst, SDL_Rect *dstrect, Uint8 brush);
-
+int SDL_SoftStretchMono8(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect, Uint8 fgbrush, Uint8 bgbrush);
 
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -81,26 +77,27 @@ int SDL_SoftStretchMono8(SDL_Surface *src, SDL_Rect *srcrect,
 
 #endif
 
+// Font Routines
 
-  /* ----------------------------------------------------------------*/
- /* ---------------------- FONT routines ---------------------------*/
-/* ----------------------------------------------------------------*/
-
-#define FONT_SIZE_X	6
-#define FONT_SIZE_Y	8
+#define FONT_SIZE_X  6
+#define FONT_SIZE_Y  8
 // chars in row in font bitmap
-#define CHARS_IN_ROW	45
+#define CHARS_IN_ROW  45
 extern SDL_Surface *font_sfc;
 
 bool fonts_initialization(void);
+
 void fonts_termination(void);
-void font_print(int x,int y,const char *text,SDL_Surface *surface, double kx, double ky);
-void font_print_right(int x,int y,const char *text,SDL_Surface *surface, double kx, double ky);
+
+void font_print(int x, int y, const char *text, SDL_Surface *surface, double kx, double ky);
+
+void font_print_right(int x, int y, const char *text, SDL_Surface *surface, double kx, double ky);
+
 void font_print_centered(int x, int y, const char *text, SDL_Surface *surface, double kx, double ky);
 
-///////////////////////////////////////////////////////////////////////////
-////// Some auxiliary functions //////////////
-///////////////////////////////////////////////////////////////////////////
-void surface_fader(SDL_Surface *surface,float r_factor,float g_factor,float b_factor,float a_factor,SDL_Rect *r);
+// Some auxiliary functions
+void surface_fader(SDL_Surface *surface, float r_factor, float g_factor, float b_factor, float a_factor, SDL_Rect *r);
+
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+
 void rectangle(SDL_Surface *surface, int x, int y, int w, int h, Uint32 pixel);

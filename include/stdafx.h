@@ -8,27 +8,21 @@
 #define WM_MOUSEWHEEL 0x020A
 #endif
 
-//#include <crtdbg.h>
-//#include <dsound.h>
-//#include <dshow.h>
-
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <tchar.h>
 #include <time.h>
+#include <inttypes.h>
+#include <stdint.h>
 
-#include "wiiutil.h"
+#ifndef _WIN32
+#  include "wincompat.h"
+#else
+#  include <windows.h>
+#endif
 
-#include "wincompat.h"
-//#include <winuser.h> // WM_MOUSEWHEEL
-//#include <commctrl.h>
-//#include <ddraw.h> - no need
-//#include <htmlhelp.h> - no need
 #include <SDL.h>
-//#include <SDL2/SDL.h>
-
 
 #include "Common.h"
 #include "Structs.h"
@@ -38,7 +32,7 @@
 
 #include "CPU.h"
 
-#include "Debug.h" //- may be soon...
+#include "Debug.h"
 
 
 #include "Disk.h"
@@ -47,29 +41,26 @@
 
 #include "Frame.h"
 #include "Harddisk.h"
+#include "Clock.h"
 #include "Joystick.h"
 #include "Keyboard.h"
 #include "Log.h"
 #include "Memory.h"
 #include "Mockingboard.h"
 #include "ParallelPrinter.h"
-//#include "PropertySheetPage.h"
 #include "Registry.h"
 
 #include "Riff.h"
 #include "SaveState.h"
-//#include "SerialComms.h"
+#include "SerialComms.h"
 #include "SoundCore.h"  //- will do later
 #include "Speaker.h"
-//#include "Tfe/Tfe.h"
 
 #include "stretch.h"
+
+#include "Timer.h"
+
 #include "Video.h"
 
-
-
-
-
-
-//#include "Util_MemoryTextFile.h"
-
+// This is to faciliate porting to SDL2
+#include "shim.h"
