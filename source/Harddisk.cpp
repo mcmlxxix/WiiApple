@@ -330,75 +330,75 @@ bool HD_InsertDisk(int nDrive, LPCTSTR imageFileName) {
   return result;
 }
 
-void HD_FTP_Select(int nDrive)
-{
-  // Selects HDrive from FTP directory
-  static size_t fileIndex = 0; // file index will be remembered for current dir
-  static size_t backdx = 0;  //reserve
-  static size_t dirdx = 0;  // reserve for dirs
-
-  std::string filename;      // given filename
-  std::string fullPath;  // full path for it
-  bool isDirectory = true;      // if given filename is a directory?
-
-  fileIndex = backdx;
-  fullPath = g_sFTPServerHDD;  // global var for FTP path for HDD
-
-  while (isDirectory) {
-    if (!ChooseAnImageFTP(g_ScreenWidth, g_ScreenHeight, fullPath, 7,
-                          filename, isDirectory, fileIndex)) {
-      DrawFrameWindow();
-      return;  // if ESC was pressed, just leave
-    }
-    // --
-    if (isDirectory) {
-      if (filename == "..") {
-        // go to the upper directory
-        auto r = fullPath.find_last_of(FTP_SEPARATOR);
-        if (r == fullPath.size()-1) {
-          r = fullPath.find_last_of(FTP_SEPARATOR, r-1);
-        }
-        if (r != std::string::npos) {
-          fullPath = fullPath.substr(0, 1+r);
-        }
-        if (fullPath == "") {
-          fullPath = "/";  //we don't want fullPath to be empty
-        }
-        fileIndex = dirdx;  // restore
-      } else {
-        if (fullPath != "/") {
-          fullPath += filename + "/";
-        } else {
-          fullPath = "/" + filename + "/";
-        }
-        printf("HD_FTP_Select: we build %s\n", fullPath.c_str());
-        dirdx = fileIndex; // store it
-        fileIndex = 0;  // start with beginning of dir
-      }
-    }
-  }
-  // we chose some file
-  strcpy(g_sFTPServerHDD, fullPath.c_str());
-  RegSaveString(TEXT("Preferences"), REGVALUE_FTP_HDD_DIR, 1, g_sFTPServerHDD);// save it
-
-  fullPath += "/" + filename;
-
-  std::string localPath = std::string(g_sFTPLocalDir) + "/" + filename; // local path for file
-
-  int error = ftp_get(fullPath.c_str(), localPath.c_str());
-  if (!error) {
-    if (HD_InsertDisk2(nDrive, localPath.c_str())) {
-      // save file names for HDD disk 1 or 2
-      if (nDrive) {
-        RegSaveString(TEXT("Preferences"), REGVALUE_HDD_IMAGE2, 1, localPath.c_str());
-      } else {
-        RegSaveString(TEXT("Preferences"), REGVALUE_HDD_IMAGE1, 1, localPath.c_str());
-      }
-    }
-  }
-  backdx = fileIndex;  //store cursor position
-  DrawFrameWindow();
-}
+//void HD_FTP_Select(int nDrive)
+//{
+//  // Selects HDrive from FTP directory
+//  static size_t fileIndex = 0; // file index will be remembered for current dir
+//  static size_t backdx = 0;  //reserve
+//  static size_t dirdx = 0;  // reserve for dirs
+//
+//  std::string filename;      // given filename
+//  std::string fullPath;  // full path for it
+//  bool isDirectory = true;      // if given filename is a directory?
+//
+//  fileIndex = backdx;
+//  fullPath = g_sFTPServerHDD;  // global var for FTP path for HDD
+//
+//  while (isDirectory) {
+//    if (!ChooseAnImageFTP(g_ScreenWidth, g_ScreenHeight, fullPath, 7,
+//                          filename, isDirectory, fileIndex)) {
+//      DrawFrameWindow();
+//      return;  // if ESC was pressed, just leave
+//    }
+//    // --
+//    if (isDirectory) {
+//      if (filename == "..") {
+//        // go to the upper directory
+//        auto r = fullPath.find_last_of(FTP_SEPARATOR);
+//        if (r == fullPath.size()-1) {
+//          r = fullPath.find_last_of(FTP_SEPARATOR, r-1);
+//        }
+//        if (r != std::string::npos) {
+//          fullPath = fullPath.substr(0, 1+r);
+//        }
+//        if (fullPath == "") {
+//          fullPath = "/";  //we don't want fullPath to be empty
+//        }
+//        fileIndex = dirdx;  // restore
+//      } else {
+//        if (fullPath != "/") {
+//          fullPath += filename + "/";
+//        } else {
+//          fullPath = "/" + filename + "/";
+//        }
+//        printf("HD_FTP_Select: we build %s\n", fullPath.c_str());
+//        dirdx = fileIndex; // store it
+//        fileIndex = 0;  // start with beginning of dir
+//      }
+//    }
+//  }
+//  // we chose some file
+//  strcpy(g_sFTPServerHDD, fullPath.c_str());
+//  RegSaveString(TEXT("Preferences"), REGVALUE_FTP_HDD_DIR, 1, g_sFTPServerHDD);// save it
+//
+//  fullPath += "/" + filename;
+//
+//  std::string localPath = std::string(g_sFTPLocalDir) + "/" + filename; // local path for file
+//
+//  int error = ftp_get(fullPath.c_str(), localPath.c_str());
+//  if (!error) {
+//    if (HD_InsertDisk2(nDrive, localPath.c_str())) {
+//      // save file names for HDD disk 1 or 2
+//      if (nDrive) {
+//        RegSaveString(TEXT("Preferences"), REGVALUE_HDD_IMAGE2, 1, localPath.c_str());
+//      } else {
+//        RegSaveString(TEXT("Preferences"), REGVALUE_HDD_IMAGE1, 1, localPath.c_str());
+//      }
+//    }
+//  }
+//  backdx = fileIndex;  //store cursor position
+//  DrawFrameWindow();
+//}
 
 void HD_Select(int nDrive)
 {

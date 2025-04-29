@@ -95,7 +95,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <assert.h>
 
 // for CRITICAL_SECTION handling
-#include <pthread.h>
+#include <pthreadhack.h>
 
 #define   AF_SIGN       0x80
 #define   AF_OVERFLOW   0x40
@@ -137,7 +137,7 @@ static signed int g_nIrqCheckTimeout = IRQ_CHECK_TIMEOUT;
 static bool g_bCritSectionValid = false;  // Deleting CritialSection when not valid causes crash on Win98
 
 //static CRITICAL_SECTION g_CriticalSection;  // To guard /g_bmIRQ/ & /g_bmNMI/
-pthread_mutex_t g_CriticalSection = PTHREAD_MUTEX_INITIALIZER;
+mutex_t g_CriticalSection = PTHREAD_MUTEX_INITIALIZER;
 
 static volatile UINT32 g_bmIRQ = 0;
 static volatile UINT32 g_bmNMI = 0;

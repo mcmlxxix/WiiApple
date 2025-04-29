@@ -1,6 +1,6 @@
 #pragma once
 
-#include <pthread.h>
+#include <pthreadhack.h>
 
 extern class CSuperSerialCard sg_SSC;
 

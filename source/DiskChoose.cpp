@@ -30,7 +30,7 @@
 #include "Video.h" // for contention avoidance w/video thread
 #include "DiskChoose.h"
 #include <errno.h>
-#include <pthread.h>
+#include <pthreadhack.h>
 
 #include <iostream>
 #include <vector>

@@ -98,9 +98,9 @@ typedef uint32_t DWORD;		// 32 bits
 typedef float FLOAT;
 typedef FLOAT *PFLOAT;
 
-typedef uint8_t BOOL;
-typedef BOOL near *PBOOL;
-typedef BOOL far *LPBOOL;
+//typedef uint8_t BOOL;
+//typedef BOOL near *PBOOL;
+//typedef BOOL far *LPBOOL;
 typedef BYTE near *PBYTE;
 typedef BYTE far *LPBYTE;
 

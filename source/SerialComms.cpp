@@ -180,7 +180,7 @@ char SSC_rom[] = "\x20\x9B\xC9\xA9\x16\x48\xA9\x00\x9D\xB8\x04\x9D\xB8\x03\x9D\x
                  "\x36\xE8\xE0\x04\x90\xF8\xAE\xF8\x07\x60\xC1\xD0\xD0\xCC\xC5\x08";
 
 
-pthread_mutex_t m_CriticalSection = PTHREAD_MUTEX_INITIALIZER;
+mutex_t m_CriticalSection = PTHREAD_MUTEX_INITIALIZER;
 
 // Default: 19200-8-N-1
 // Maybe a better default is: 9600-7-N-1 (for HyperTrm)

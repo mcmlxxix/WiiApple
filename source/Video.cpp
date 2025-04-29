@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "stdafx.h"
 #include "asset.h"
 #include "wwrapper.h"
-#include <pthread.h>
+#include <pthreadhack.h>
 #include <thread>
 #include <chrono>
 #include <unistd.h>
@@ -235,7 +235,7 @@ pthread_t video_worker_thread_;
 static volatile bool video_worker_active_ = false;
 static volatile bool video_worker_terminate_ = false;
 static volatile bool video_worker_refresh_ = false;
-pthread_mutex_t video_draw_mutex;
+mutex_t video_draw_mutex;
 std::condition_variable video_cv;
 
 static char display_pipeline_[0x2000*4 + 0x400*4];

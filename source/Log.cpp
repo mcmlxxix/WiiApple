@@ -28,6 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "stdafx.h"
 #include <string.h>
+#include <sys/time.h>
 
 void LogInitialize() {
   g_fh = fopen("AppleWin.log", "a+t");  // Open log file (append & text g_nAppMode)
