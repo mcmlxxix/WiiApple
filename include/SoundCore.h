@@ -11,7 +11,7 @@ void DSUninit();  // uninit SDL_Auidio
 
 void SoundCore_SetFade(int how);  //
 
-void DSUploadBuffer(short *buffer, unsigned len);
+double DSUploadBuffer(short *buffer, unsigned len);
 
 void DSUploadMockBuffer(short *buffer, unsigned len);  // Upload Mockingboard data
 
