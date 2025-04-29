@@ -1,4 +1,5 @@
 #pragma once
+#include <ogcsys.h>
 
 // Types
 enum VIDEOTYPE {

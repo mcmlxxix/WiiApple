@@ -52,7 +52,7 @@
 
 #include "Riff.h"
 #include "SaveState.h"
-#include "SerialComms.h"
+//#include "SerialComms.h"
 #include "SoundCore.h"  //- will do later
 #include "Speaker.h"
 

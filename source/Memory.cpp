@@ -36,6 +36,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 // for mlock - munlock
 //#include <sys/mman.h>
+int mlock(const void* addr, size_t len)
+{
+    return 0;
+}
+
+int munlock(const void* addr, size_t len)
+{
+    return 0;
+}
 
 #define  SW_80STORE    (memmode & MF_80STORE)
 #define  SW_ALTZP      (memmode & MF_ALTZP)
@@ -1044,7 +1053,7 @@ int MemInitialize() // returns -1 if any error during initialization
   RegisterIoHandler(uSlot, MemSetPaging, MemSetPaging, NULL, NULL, NULL, NULL);
 
   PrintLoadRom(pCxRomPeripheral, 1);        // $C100 : Parallel printer f/w
-  sg_SSC.CommInitialize(pCxRomPeripheral, 2);    // $C200 : SSC
+  //sg_SSC.CommInitialize(pCxRomPeripheral, 2);    // $C200 : SSC
   if (g_Slot4 == CT_MouseInterface)
     sg_Mouse.Initialize(pCxRomPeripheral, 4);  // $C400 : Mouse f/w
   DiskLoadRom(pCxRomPeripheral, 6);        // $C600 : Disk][ f/w

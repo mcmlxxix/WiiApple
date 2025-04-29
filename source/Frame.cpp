@@ -764,7 +764,7 @@ void ResetMachineState() {
   MemReset();
   DiskBoot();
   VideoResetState();
-  sg_SSC.CommReset();
+  //sg_SSC.CommReset();
   PrintReset();
   JoyReset();
   MB_Reset();
